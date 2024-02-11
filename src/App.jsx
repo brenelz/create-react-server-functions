@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useQuery } from '@tanstack/react-query';
 
 const getData = async () => {
   "use server";
@@ -11,14 +12,10 @@ const getData = async () => {
 };
 
 function App() {
-  const [data, setData] = useState("");
-  useEffect(() => {
-    async function loadData() {
-      const serverData = await getData();
-      setData(serverData);
-    }
-    loadData();
-  }, []);
+  const { data } = useQuery({
+    queryKey: ['serverData'],
+    queryFn: () => getData()
+  })
   return (
     <div className="App">
       <header className="App-header">
