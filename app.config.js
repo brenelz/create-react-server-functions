@@ -2,6 +2,9 @@ import { createApp } from "vinxi";
 import { serverFunctions } from "@vinxi/server-functions/plugin";
 
 export default createApp({
+  server: {
+    preset: "vercel",
+  },
   routers: [
     {
       name: "client",
